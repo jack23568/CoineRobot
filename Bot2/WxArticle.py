@@ -125,10 +125,10 @@ def update():
     # for url in article_list:
     #         time.sleep(300)
     try:
-
         times = time.localtime(time.time()-24*60*60)
         lastdate = "%s%02d%s" % (times[0], int(times[1]), times[2])
-        article_tuple = articleDao.getArticleByDate(lastdate)
+        #article_tuple = articleDao.getArticleByDate(lastdate)
+        article_tuple = articleDao.getAllArticle()
         article_list = []
 
         for tuple_ in article_tuple:
@@ -169,18 +169,10 @@ def update():
     except Exception as e:
         print e.message
 
-def listen_article():
 
-
-    schedule.every(300).seconds.do(update)
+def listing():
+    schedule.every(10).minutes.do(update)
     while True:
         schedule.run_pending()
-    # schedule.every().day.at("10:30").do(update)
 
-threading.Thread(target=listen_article).start()
-
-if __name__ == "__main__":
-
-    update();
-
-    pass
+threading.Thread(target=listing).start()

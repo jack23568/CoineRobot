@@ -7,8 +7,8 @@
 '''
 数据库配置文件
 '''
-host='localhost'
-user='root'
-passwd='root'
-db='db_wxrobot625'
+host='120.55.44.220'
+user='Eric'
+passwd='15975312'
+db='db_wxrobot'
 port=3306

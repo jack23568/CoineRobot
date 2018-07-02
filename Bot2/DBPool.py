@@ -14,7 +14,7 @@ class DbManager():
     def __init__(self):
         try:
             self._pool = PooledDB(pymysql,5,host=DBConfig.host,user=DBConfig.user,passwd=DBConfig.passwd,db=DBConfig.db,port=DBConfig.port, use_unicode=True, charset="utf8mb4")
-        except Exception as e:
+        except Exception, e:
             print "The parameters for DBUtils is:", ""
 
     def _getConn(self):

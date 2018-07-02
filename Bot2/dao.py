@@ -243,3 +243,46 @@ class ArticleDao(object):
             log.error("ArticleDao.modifyArticle: "+e.message)
             return 0
 
+
+
+class ApplyMessageDao(object):
+
+    def get_message(self):
+        """
+        查询消息是否存在
+        :return: 不存在返回空 存在则返回内容
+        """
+        try:
+            sql = "select * from Robot_bot where id =1"
+            conn = getConn()
+            cursor = conn.cursor()
+            rowcount = cursor.execute(sql)
+            if rowcount > 0:
+                res = cursor.fetchone()[4]
+            else:
+                res = None
+            cursor.close()
+            conn.close()
+            return res
+        except Exception as e:
+            log.error("ApplyMessageDao.get_message: "+e.message)
+            return -1
+
+    def clean(self):
+        """
+        清空消息记录
+        :return: 成功1 失败0 异常-1
+        """
+        try:
+            sql = "UPDATE haoyidai_message SET content='' WHERE id =1"
+            conn = getConn()
+            cursor = conn.cursor()
+            rowcount = cursor.execute(sql)
+            conn.commit()
+            cursor.close()
+            conn.close()
+            return rowcount
+        except Exception as e:
+            log.error("ApplyMessageDao.clean: "+e.message)
+            return -1
+
